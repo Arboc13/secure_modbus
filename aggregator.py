@@ -25,7 +25,7 @@ def aggregator( ):
             payload, tag = rcv[:16], rcv[16:]
             expected = hmac.new(key, payload, hashlib.sha256).digest()
             if not hmac.compare_digest(tag, expected):
-                print("Wrong HMAC key")
+                print("Tampered message: Wrong HMAC key")
                 continue
 
             registers = struct.unpack(">6H", payload[:12])
@@ -37,6 +37,8 @@ def aggregator( ):
 
             context[0].setValues(3, 0, list(registers))
             print("OK:", registers)
+
+
 
 
 if __name__ == "__main__":

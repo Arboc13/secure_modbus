@@ -22,12 +22,19 @@ def edge(tamper=False, expired=False):
         s.connect(("127.0.0.1", 5001))
         s.sendall(message)
 
-    s.sendall(message)
+        s.sendall(message)
     print("Message sent.")
 
+
+def edge_loop(period=2):
+    while True:
+        edge()
+        time.sleep(period)
 
 
 if __name__ == "__main__":
     import sys
     mode = sys.argv[1] if len(sys.argv) > 1 else ""
+    if( mode == "loop"):
+        edge_loop()
     edge(tamper=(mode == "tamper"), expired=(mode == "expired"))
