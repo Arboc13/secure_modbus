@@ -41,6 +41,7 @@ def aggregator( ):
 
 
 
+
 if __name__ == "__main__":
     t = threading.Thread(target=aggregator, daemon=True).start()
     StartTcpServer(context, address=("127.0.0.1", 5020))
